@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Inter";
+  src: url('./Inter-Light.woff');
+}
+
+@font-face {
+  font-family: "Inter-bold";
+  src: url('./Inter-Black.woff');
+}
+
+.container {
+  max-width: 650px;
+  width: 100%;
+  margin: auto;
+}

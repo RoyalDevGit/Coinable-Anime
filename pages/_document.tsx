@@ -3,7 +3,6 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 import theme from '../src/theme';
 
-// https://mui.com/styles/advanced/#next-js
 export default class MyDocument extends Document {
   render() {
     return (
@@ -25,7 +24,6 @@ export default class MyDocument extends Document {
   }
 }
 
-// https://github.com/vercel/next.js/blob/master/examples/with-styled-components/pages/_document.js
 MyDocument.getInitialProps = async (ctx) => {
   const sheet = new ServerStyleSheet();
   const originalRenderPage = ctx.renderPage;

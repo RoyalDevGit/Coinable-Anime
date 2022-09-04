@@ -14,6 +14,9 @@ const theme = createTheme({
       main: red.A400,
     },
   },
+  shape: {
+    borderRadius: 40,
+  }
 });
 
 export default theme;
