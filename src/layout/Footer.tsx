@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography } from "@mui/material";
+import { makeStyles, createStyles } from "@mui/material";
 import { styled, alpha } from "@mui/material/styles";
 import ArrowDropDownIcon from "@mui/icons-material/ExpandLess";
 import Button from "@mui/material/Button";
@@ -16,11 +17,17 @@ const FooterContent = styled("div")(({ theme }) => ({
   left: 0,
   width: "100%",
   padding: "20px 0px",
-  maxWidth: "700px",
+  maxWidth: "650px",
   margin: "auto",
+  backgroundColor: "white",
+  zIndex: "4",
 }));
 
-const ExpandButton = styled(Button)(({ theme }) => ({
+type Props = {
+  onClick: any;
+};
+
+const ExpandButton = styled(Button)<Props>(({ theme }) => ({
   backgroundColor: alpha(theme.palette.common.black, 0.1),
   minWidth: "20px",
   width: "30px",
@@ -36,6 +43,18 @@ const FooterDiv = styled("div")(({ theme }) => ({
 }));
 
 export default function Footer() {
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const anchor = (
+      (event.target as HTMLDivElement).ownerDocument || document
+    ).querySelector("#back-to-top-anchor");
+    console.log("asdfasdf");
+    if (anchor) {
+      anchor.scrollIntoView({
+        block: "center",
+      });
+    }
+  };
+
   return (
     <FooterDiv>
       <Divider style={{ position: "fixed", bottom: "100px", width: "100%" }} />
@@ -45,7 +64,7 @@ export default function Footer() {
             alignItems: "center",
             display: "flex",
             justifyContent: "space-between",
-            paddingTop: "20px",
+            height: "60px",
           }}
         >
           <Comment>
@@ -56,7 +75,7 @@ export default function Footer() {
               about this task{" "}
             </Typography>
           </Comment>
-          <ExpandButton>
+          <ExpandButton onClick={handleClick}>
             <ArrowDropDownIcon />
           </ExpandButton>
         </div>

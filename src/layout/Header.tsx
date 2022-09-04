@@ -82,24 +82,26 @@ const LogoLabel = styled(Typography)({
   color: "black",
 });
 
-export default function Header() {
+type HeaderProps = {
+  id?: string;
+};
+
+export default function Header(props: HeaderProps) {
   return (
-    <>
-      <div className="container">
-        <HeaderDiv>
-          <LogoLabel>Anime</LogoLabel>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon color="disabled" fontSize="inherit" />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
-          <DateLabel>Today is 3th of September</DateLabel>
-        </HeaderDiv>
-      </div>
-    </>
+    <div id={props.id} className="container">
+      <HeaderDiv>
+        <LogoLabel>Anime</LogoLabel>
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon color="disabled" fontSize="inherit" />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <DateLabel>Today is 3th of September</DateLabel>
+      </HeaderDiv>
+    </div>
   );
 }
