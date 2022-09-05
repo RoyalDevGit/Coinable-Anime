@@ -16,8 +16,8 @@ const FooterContent = styled("div")(({ theme }) => ({
   right: 0,
   left: 0,
   width: "100%",
-  padding: "20px 0px",
-  maxWidth: "650px",
+  padding: "20px 10px",
+  maxWidth: "655px",
   margin: "auto",
   backgroundColor: "white",
   zIndex: "4",
@@ -47,10 +47,10 @@ export default function Footer() {
     const anchor = (
       (event.target as HTMLDivElement).ownerDocument || document
     ).querySelector("#back-to-top-anchor");
-    console.log("asdfasdf");
     if (anchor) {
-      anchor.scrollIntoView({
-        block: "center",
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
       });
     }
   };

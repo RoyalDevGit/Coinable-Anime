@@ -1,20 +1,12 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "src/layout/Header";
+import { styled, alpha } from "@mui/material/styles";
 import Footer from "./../src/layout/Footer";
-import {
-  AppBar,
-  CssBaseline,
-  Grid,
-  Paper,
-  Slide,
-  useScrollTrigger,
-} from "@mui/material";
+import { AppBar, Grid, Paper, Slide, useScrollTrigger } from "@mui/material";
+import Image from "next/image";
+import SearchDialog from "src/SearchDialog";
 
 interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window?: () => Window;
   children: React.ReactElement;
 }
@@ -32,7 +24,41 @@ function HideOnScroll(props: Props) {
   );
 }
 
+const ImageContainer = styled(Paper)(({ theme }) => ({
+  height: "250px",
+  position: "relative",
+  [theme.breakpoints.only("md")]: {
+    height: "250px",
+  },
+  [theme.breakpoints.only("sm")]: {
+    height: "350px",
+  },
+  [theme.breakpoints.only("xs")]: {
+    height: "450px",
+  },
+}));
+
+const ImageGrid = styled(Grid)(({ theme }) => ({
+  padding: "30px 10px 130px",
+  [theme.breakpoints.only("xs")]: {
+    margin: "auto",
+    maxWidth: "350px",
+    padding: "0px 10px",
+  },
+}));
+
 export default function Index(props: Props) {
+  const [anime, setAnime] = useState<Array<any>>([]);
+
+  const getData = async () => {
+    const data = await (await fetch("https://api.jikan.moe/v4/anime")).json();
+    setAnime(data.data);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
       <HideOnScroll {...props}>
@@ -41,26 +67,25 @@ export default function Index(props: Props) {
         </AppBar>
       </HideOnScroll>
       <Header id="back-to-top-anchor" />
+      <SearchDialog />
       <div className="container">
-        <Grid
+        <ImageGrid
           container
-          sx={{ padding: "30px 0px 130px 0px" }}
-          spacing={{ xs: 2, md: 3 }}
+          spacing={{ xs: 1.5, sm: 2, md: 3 }}
+          columnSpacing={{ xs: 0, sm: 2, md: 3 }}
         >
-          {Array.from(Array(12)).map((_, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
-              <Paper
-                style={{
-                  height: "250px",
-                  backgroundColor: "gray",
-                  borderRadius: "10px",
-                }}
-              >
-                xs=2
-              </Paper>
+          {anime.map((item) => (
+            <Grid item xs={12} sm={6} md={4} key={item.mal_id}>
+              <ImageContainer>
+                <Image
+                  style={{ borderRadius: "10px" }}
+                  src={anime[1].images.jpg.image_url}
+                  layout="fill"
+                />
+              </ImageContainer>
             </Grid>
           ))}
-        </Grid>
+        </ImageGrid>
       </div>
       <Footer />
     </>

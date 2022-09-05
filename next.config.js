@@ -5,6 +5,9 @@ const withTM = require("next-transpile-modules")([
 
 module.exports = withTM({
   reactStrictMode: true,
+  images: {
+    domains: ['cdn.myanimelist.net'],
+  },
   experimental: {
     // Enables the styled-components SWC transform
     styledComponents: true
